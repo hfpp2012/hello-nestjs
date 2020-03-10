@@ -15,7 +15,7 @@ export default {
   typeorm: {
     db: {
       host: process.env.DB_HOST || 'localhost',
-      type: process.env.DB_TYPE! || 'mysql',
+      type: process.env.DB_TYPE || 'mysql',
       port: process.env.DB_PORT || 3306,
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '12345678',
