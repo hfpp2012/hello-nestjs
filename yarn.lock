@@ -2261,7 +2261,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class-validator@>=0.9.1:
+class-validator@>=0.9.1, class-validator@^0.11.1:
   version "0.11.1"
   resolved "https://registry.npm.taobao.org/class-validator/download/class-validator-0.11.1.tgz#9033b9ebdc3883e826dfc0c545a45935e3298553"
   integrity sha1-kDO569w4g+gm38DFRaRZNeMphVM=
