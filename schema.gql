@@ -3,9 +3,16 @@
 # ------------------------------------------------------
 
 type Mutation {
-  register(confirmPassword: String!, password: String!, username: String!, email: String!): String!
+  register(data: RegisterInput!): String!
 }
 
 type Query {
   hello: String!
+}
+
+input RegisterInput {
+  email: String!
+  username: String!
+  password: String!
+  confirmPassword: String!
 }
