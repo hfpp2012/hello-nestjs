@@ -2,7 +2,9 @@ import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RegisterInput } from './dto/register.input';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)

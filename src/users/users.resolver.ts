@@ -12,7 +12,7 @@ export class UsersResolver {
     return 'hello world';
   }
 
-  @Mutation(() => String)
+  @Mutation(() => User)
   register(@Args('data') registerData: RegisterInput): Promise<User> {
     return this.usersService.register(registerData);
   }
