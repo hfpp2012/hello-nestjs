@@ -16,4 +16,9 @@ export class UsersResolver {
   register(@Args('data') registerData: RegisterInput): Promise<User> {
     return this.usersService.register(registerData);
   }
+
+  // @ResolveField(() => String)
+  // async token(@Parent() parent: User) {
+  //   return parent.username;
+  // }
 }

@@ -22,4 +22,9 @@ export class User extends Base {
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
   }
+
+  @Field(() => String)
+  get token() {
+    return this.username;
+  }
 }

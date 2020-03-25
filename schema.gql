@@ -28,4 +28,5 @@ type User {
   updatedAt: DateTime!
   email: String!
   username: String!
+  token: String!
 }
