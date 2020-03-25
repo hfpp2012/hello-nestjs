@@ -7,8 +7,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input LoginInput {
+  username: String!
+  password: String!
+}
+
 type Mutation {
   register(data: RegisterInput!): User!
+  login(data: LoginInput!): User!
 }
 
 type Query {

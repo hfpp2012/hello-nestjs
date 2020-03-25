@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RegisterInput } from './dto/register.input';
 import { Injectable } from '@nestjs/common';
+import { LoginInput } from './dto/login.input';
 
 @Injectable()
 export class UsersService {
@@ -21,5 +22,11 @@ export class UsersService {
         ...registerData,
       })
       .save();
+  }
+
+  async login(loginData: LoginInput): Promise<User> {
+    return await this.usersRepository.findOneOrFail({
+      username: loginData.username,
+    });
   }
 }
