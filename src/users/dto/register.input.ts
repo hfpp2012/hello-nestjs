@@ -1,5 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { IsEmail, MinLength, IsNotEmpty } from 'class-validator';
+import { IsEqual } from '../validators/IsEqual';
+import { IsUserAlreadyExist } from '../validators/IsUserAlreadyExist';
 
 @InputType()
 export class RegisterInput {
@@ -11,6 +13,7 @@ export class RegisterInput {
   @Field()
   @IsNotEmpty()
   @MinLength(6)
+  @IsUserAlreadyExist()
   username: string;
 
   @Field()
@@ -19,5 +22,6 @@ export class RegisterInput {
 
   @Field()
   @IsNotEmpty()
+  @IsEqual('password')
   confirmPassword: string;
 }
