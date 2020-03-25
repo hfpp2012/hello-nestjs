@@ -14,6 +14,10 @@ export class UsersService {
   }
 
   async register(registerData: RegisterInput): Promise<User> {
-    return this.usersRepository.save({ ...registerData });
+    return this.usersRepository
+      .create({
+        ...registerData,
+      })
+      .save();
   }
 }
