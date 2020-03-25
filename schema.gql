@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreatePostInput {
+  body: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -15,6 +19,15 @@ input LoginInput {
 type Mutation {
   register(data: RegisterInput!): User!
   login(data: LoginInput!): User!
+  createPost(data: CreatePostInput!): Post!
+}
+
+type Post {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  body: String!
+  user: User!
 }
 
 type Query {
