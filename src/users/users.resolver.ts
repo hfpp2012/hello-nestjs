@@ -14,12 +14,12 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  register(@Args('data') registerData: RegisterInput): Promise<User> {
-    return this.usersService.register(registerData);
+  async register(@Args('data') registerData: RegisterInput): Promise<User> {
+    return await this.usersService.register(registerData);
   }
 
   @Mutation(() => User)
-  login(@Args('data') loginData: LoginInput): Promise<User> {
-    return this.usersService.login(loginData);
+  async login(@Args('data') loginData: LoginInput): Promise<User> {
+    return await this.usersService.login(loginData);
   }
 }
