@@ -33,6 +33,7 @@ type Post {
 type Query {
   hello: String!
   getPosts: [Post]!
+  getPost(id: Int!): Post!
 }
 
 input RegisterInput {

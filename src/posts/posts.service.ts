@@ -16,6 +16,10 @@ export class PostsService {
     return this.postsRepository.find();
   }
 
+  async one(id: number): Promise<Post> {
+    return this.postsRepository.findOneOrFail(id);
+  }
+
   async createPost(createPostData: CreatePostInput, user: User): Promise<Post> {
     return this.postsRepository
       .create({
