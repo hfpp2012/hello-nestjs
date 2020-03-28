@@ -13,6 +13,7 @@ export class Post extends Base {
   @ManyToOne(
     () => User,
     user => user.posts,
+    { eager: true },
   )
   @Field(() => User)
   user: User;

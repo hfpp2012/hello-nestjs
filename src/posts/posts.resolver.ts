@@ -1,13 +1,18 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { Mutation, Args, Context } from '@nestjs/graphql';
+import { Mutation, Args, Context, Resolver, Query } from '@nestjs/graphql';
 import { Post } from './post.entity';
 import { CreatePostInput } from './dto/create-post.input';
 import { GqlAuthGuard } from '../auth/gql-auth.guard';
 
-@Controller('posts')
+@Resolver()
 export class PostsResolver {
   constructor(private readonly postsService: PostsService) {}
+
+  @Query(() => [Post], { nullable: 'items' })
+  async getPosts() {
+    return await this.postsService.all();
+  }
 
   @Mutation(() => Post)
   @UseGuards(GqlAuthGuard)
