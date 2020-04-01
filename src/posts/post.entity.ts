@@ -23,5 +23,6 @@ export class Post extends Base {
     () => Comment,
     comment => comment.post,
   )
+  @Field(() => [Comment], { nullable: 'items' })
   comments: Comment[];
 }

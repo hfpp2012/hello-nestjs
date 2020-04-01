@@ -23,7 +23,7 @@ export class PostsService {
   }
 
   async one(id: number): Promise<Post> {
-    return this.postsRepository.findOneOrFail(id);
+    return this.postsRepository.findOneOrFail(id, { relations: ['comments'] });
   }
 
   async createPost(createPostData: CreatePostInput, user: User): Promise<Post> {
