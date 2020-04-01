@@ -1,12 +1,12 @@
-import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { Base } from '../shared/base.entity';
 import { ObjectType, Field } from '@nestjs/graphql';
 import { User } from '../users/user.entity';
-import { Comment } from '../comments/comment.entity';
+import { Post } from './../posts/post.entity';
 
-@Entity('posts')
+@Entity('comments')
 @ObjectType()
-export class Post extends Base {
+export class Comment extends Base {
   @Column('text')
   @Field()
   body: string;
@@ -19,9 +19,10 @@ export class Post extends Base {
   @Field(() => User)
   user: User;
 
-  @OneToMany(
-    () => Comment,
-    comment => comment.post,
+  @ManyToOne(
+    () => Post,
+    post => post.comments,
   )
-  comments: Comment[];
+  @Field(() => Post)
+  post: Post;
 }

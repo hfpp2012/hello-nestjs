@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comment {
+  id: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  body: String!
+  user: User!
+  post: Post!
+}
+
+input CreateCommentInput {
+  body: String!
+}
+
+input CreatePostInput {
+  body: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -15,9 +32,10 @@ input LoginInput {
 type Mutation {
   register(data: RegisterInput!): User!
   login(data: LoginInput!): User!
-  createPost(data: PostInput!): Post!
+  createPost(data: CreatePostInput!): Post!
   deletePost(id: Int!): String!
-  updatePost(data: PostInput!, id: Int!): Post!
+  updatePost(data: UpdatePostInput!, id: Int!): Post!
+  createComment(data: CreateCommentInput!, postId: Int!): Comment!
 }
 
 type Post {
@@ -26,10 +44,6 @@ type Post {
   updatedAt: DateTime!
   body: String!
   user: User!
-}
-
-input PostInput {
-  body: String!
 }
 
 type Query {
@@ -43,6 +57,10 @@ input RegisterInput {
   username: String!
   password: String!
   confirmPassword: String!
+}
+
+input UpdatePostInput {
+  body: String!
 }
 
 type User {
