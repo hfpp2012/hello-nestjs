@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './post.entity';
-import { CreatePostInput } from './dto/create-post.input';
+import { PostInput } from './dto/create-post.input';
 import { User } from '../users/user.entity';
 
 @Injectable()
@@ -20,12 +20,22 @@ export class PostsService {
     return this.postsRepository.findOneOrFail(id);
   }
 
-  async createPost(createPostData: CreatePostInput, user: User): Promise<Post> {
+  async createPost(createPostData: PostInput, user: User): Promise<Post> {
     return this.postsRepository
       .create({
         ...createPostData,
         user,
       })
       .save();
+  }
+
+  async updatePost(
+    id: number,
+    updatePostData: PostInput,
+    user: User,
+  ): Promise<Post> {
+    let post = await this.postsRepository.findOneOrFail({ id, user });
+
+    return await this.postsRepository.save({ post, ...updatePostData });
   }
 }
