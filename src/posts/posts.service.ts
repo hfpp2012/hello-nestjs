@@ -38,4 +38,11 @@ export class PostsService {
 
     return await this.postsRepository.save({ post, ...updatePostData });
   }
+
+  async deletePost(id: number, user: User): Promise<string> {
+    let post = await this.postsRepository.findOneOrFail({ id, user });
+
+    await this.postsRepository.remove(post);
+    return 'deleted successfully';
+  }
 }

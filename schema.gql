@@ -16,6 +16,7 @@ type Mutation {
   register(data: RegisterInput!): User!
   login(data: LoginInput!): User!
   createPost(data: PostInput!): Post!
+  deletePost(id: Int!): String!
   updatePost(data: PostInput!, id: Int!): Post!
 }
 
