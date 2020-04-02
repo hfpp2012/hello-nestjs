@@ -1,4 +1,11 @@
-import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinTable,
+  ManyToMany,
+} from 'typeorm';
 import { Base } from '../shared/base.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from '../users/user.entity';
@@ -30,4 +37,14 @@ export class Post extends Base {
   get commentCount() {
     return this.comments.length;
   }
+
+  @Field(() => Int)
+  get likeCount() {
+    return this.likes.length;
+  }
+
+  @ManyToMany(() => User)
+  @JoinTable()
+  @Field(() => [User], { nullable: 'items' })
+  likes: User[];
 }

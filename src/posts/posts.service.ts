@@ -23,7 +23,9 @@ export class PostsService {
   }
 
   async one(id: number): Promise<Post> {
-    return this.postsRepository.findOneOrFail(id, { relations: ['comments'] });
+    return this.postsRepository.findOneOrFail(id, {
+      relations: ['comments', 'likes'],
+    });
   }
 
   async createPost(createPostData: CreatePostInput, user: User): Promise<Post> {
@@ -61,17 +63,31 @@ export class PostsService {
     return await this.postsRepository.save({ post, ...updatePostData });
   }
 
-  async deletePost(id: number, user: User): Promise<string> {
+  async deletePost(id: number, user: User): Promise<boolean> {
     let post = await this.postsRepository.findOneOrFail({ id, user });
 
     await this.postsRepository.remove(post);
-    return 'deleted successfully';
+    return true;
   }
 
-  async deleteComment(id: number, user: User): Promise<string> {
+  async deleteComment(id: number, user: User): Promise<boolean> {
     let comment = await this.commentsRepository.findOneOrFail({ id, user });
 
     await this.commentsRepository.remove(comment);
-    return 'deleted successfully';
+    return true;
+  }
+
+  async likePost(id: number, user: User): Promise<Post> {
+    let post = await this.postsRepository.findOneOrFail(id, {
+      relations: ['likes'],
+    });
+
+    if (post.likes && post.likes.find(like => like.id === user.id)) {
+      post.likes = post.likes.filter(like => like.id !== user.id);
+    } else {
+      post.likes = [...post.likes, user];
+    }
+
+    return await this.postsRepository.save(post);
   }
 }

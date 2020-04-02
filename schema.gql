@@ -33,10 +33,11 @@ type Mutation {
   register(data: RegisterInput!): User!
   login(data: LoginInput!): User!
   createPost(data: CreatePostInput!): Post!
-  deletePost(id: Int!): String!
-  deleteComment(commentId: Int!): String!
+  deletePost(id: Int!): Boolean!
+  deleteComment(commentId: Int!): Boolean!
   updatePost(data: UpdatePostInput!, id: Int!): Post!
   createComment(data: CreateCommentInput!, postId: Int!): Comment!
+  likePost(id: Int!): Post!
 }
 
 type Post {
@@ -47,6 +48,8 @@ type Post {
   user: User!
   comments: [Comment]!
   commentCount: Int!
+  likeCount: Int!
+  likes: [User]!
 }
 
 type Query {
