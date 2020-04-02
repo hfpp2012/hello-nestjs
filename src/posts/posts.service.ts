@@ -67,4 +67,11 @@ export class PostsService {
     await this.postsRepository.remove(post);
     return 'deleted successfully';
   }
+
+  async deleteComment(id: number, user: User): Promise<string> {
+    let comment = await this.commentsRepository.findOneOrFail({ id, user });
+
+    await this.commentsRepository.remove(comment);
+    return 'deleted successfully';
+  }
 }

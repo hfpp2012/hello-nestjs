@@ -42,6 +42,16 @@ export class PostsResolver {
     return await this.postsService.deletePost(id, user);
   }
 
+  @Mutation(() => String)
+  @UseGuards(GqlAuthGuard)
+  async deleteComment(
+    @Args({ name: 'commentId', type: () => Int }) id: number,
+    @Context() context: any,
+  ): Promise<string> {
+    const { user } = context.req;
+    return await this.postsService.deleteComment(id, user);
+  }
+
   @Mutation(() => Post)
   @UseGuards(GqlAuthGuard)
   async updatePost(

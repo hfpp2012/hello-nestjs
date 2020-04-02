@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Base } from '../shared/base.entity';
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from '../users/user.entity';
 import { Comment } from '../comments/comment.entity';
 
@@ -25,4 +25,9 @@ export class Post extends Base {
   )
   @Field(() => [Comment], { nullable: 'items' })
   comments: Comment[];
+
+  @Field(() => Int)
+  get commentCount() {
+    return this.comments.length;
+  }
 }

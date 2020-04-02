@@ -22,6 +22,7 @@ export class Comment extends Base {
   @ManyToOne(
     () => Post,
     post => post.comments,
+    { onDelete: 'CASCADE' },
   )
   @Field(() => Post)
   post: Post;
