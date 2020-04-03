@@ -11,11 +11,7 @@ export class Comment extends Base {
   @Field()
   body: string;
 
-  @ManyToOne(
-    () => User,
-    user => user.posts,
-    { eager: true },
-  )
+  @ManyToOne(() => User, { eager: true })
   @Field(() => User)
   user: User;
 
