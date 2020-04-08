@@ -7,6 +7,7 @@ import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -17,10 +18,15 @@ import { join } from 'path';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       context: ({ req }) => ({ req }),
+      uploads: {
+        maxFileSize: 10000000, // 10 MB
+        maxFiles: 1,
+      },
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
+    StorageModule,
   ],
   controllers: [],
   providers: [],
