@@ -12,6 +12,9 @@ import { StorageModule } from './storage/storage.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig as TypeOrmModuleOptions),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+    }),
     AuthModule,
     UsersModule,
     PostsModule,
@@ -22,9 +25,6 @@ import { StorageModule } from './storage/storage.module';
         maxFileSize: 10000000, // 10 MB
         maxFiles: 1,
       },
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client'),
     }),
     StorageModule,
   ],

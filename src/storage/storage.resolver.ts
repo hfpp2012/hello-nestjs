@@ -12,4 +12,11 @@ export class StorageResolver {
   ): Promise<String> {
     return await this.storageService.fileUpload(file);
   }
+
+  @Mutation(() => String)
+  async aliyunFileUpload(
+    @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
+  ): Promise<String> {
+    return await this.storageService.aliyunFileUpload(file);
+  }
 }

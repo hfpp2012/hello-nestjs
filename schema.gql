@@ -39,6 +39,7 @@ type Mutation {
   createComment(data: CreateCommentInput!, postId: Int!): Comment!
   likePost(id: Int!): Post!
   fileUpload(file: Upload!): String!
+  aliyunFileUpload(file: Upload!): String!
 }
 
 type Post {

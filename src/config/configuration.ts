@@ -6,6 +6,14 @@ const isProductionEnvironment = process.env.NODE_ENV === 'production';
 export default {
   environment: process.env.NODE_ENV || 'development',
   host: process.env.APP_HOST || '127.0.0.1',
+  aliyun: {
+    oss: {
+      region: process.env.ALIYUN_OSS_REGION,
+      accessKeyId: process.env.ALIYUN_OSS_ACCESSKEY_ID,
+      accessKeySecret: process.env.ALIYUN_OSS_SECRET,
+      bucket: process.env.ALIYUN_OSS_BUCKET,
+    },
+  },
   port:
     (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) ||
     '5001',
